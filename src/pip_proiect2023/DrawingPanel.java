@@ -86,7 +86,9 @@ public class DrawingPanel extends JPanel {
     
     public static void main(String[] args) {
         // Create the frame and panel
-        JFrame frame = new JFrame("Selectie rectangle");
+    	
+    	creareMeniuPrincipal meniuPrincipal = new creareMeniuPrincipal();
+        /*JFrame frame = new JFrame("Selectie rectangle");
         JPanel panel = new DrawingPanel();
         
         // Add the panel to the frame
@@ -94,6 +96,6 @@ public class DrawingPanel extends JPanel {
         
         // Set the size of the frame and show it
         frame.setSize(500, 500);
-        frame.setVisible(true);
+        frame.setVisible(true);*/
     }
 }
