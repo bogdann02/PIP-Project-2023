@@ -83,18 +83,18 @@ public class DrawingPanel extends JPanel {
         return new Rectangle(x, y, width, height);
     }
     
-    public static void main(String[] args) {
-        // Create the frame and panel
-    	
-    	creareMeniuPrincipal meniuPrincipal = new creareMeniuPrincipal();
-        /*JFrame frame = new JFrame("Selectie rectangle");
-        JPanel panel = new DrawingPanel();
-        
-        // Add the panel to the frame
-        frame.add(panel);
-        
-        // Set the size of the frame and show it
-        frame.setSize(500, 500);
-        frame.setVisible(true);*/
+    public List<Rectangle> getList() {
+    	return rectangles;
     }
+    
+    public void clearList()
+    {
+    	rectangles = new ArrayList<>();
+    }
+    
+    public void undoList()
+    {
+    	rectangles.remove(rectangles.size()-1);
+    }
+    
 }
