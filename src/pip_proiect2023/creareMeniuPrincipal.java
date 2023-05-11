@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -53,17 +54,25 @@ public class creareMeniuPrincipal extends JFrame{
 	exit.setBorderPainted(false);
 	meniuPrincipal.add(exit);
 	
-	ActionListener act_li=new ActionListener() {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			if (e.getActionCommand()=="")
-				{
-						System.out.println("Print load image");
-				}
-		}
-	};
+	ActionListener act_li= new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	
+            JFileChooser fileChooser = new JFileChooser();
+            int result = fileChooser.showOpenDialog(creareMeniuPrincipal.this);
+            if (result == JFileChooser.APPROVE_OPTION) {
+            	
+                // User has selected a file
+                String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+                
+                // Close the file chooser dialog box
+                dispose();
+                
+                // Open another JFrame for editing the image
+                
+                new gui2(filePath);
+            }
+        }
+    };
 	li.addActionListener(act_li);
 	
 	ActionListener act_help=new ActionListener() {
