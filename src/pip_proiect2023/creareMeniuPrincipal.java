@@ -18,6 +18,7 @@ public class creareMeniuPrincipal extends JFrame{
 
 	public creareMeniuPrincipal() {
 	
+	// Se creaza GUI1 pentru meniul principal
 	JFrame meniuPrincipal = new JFrame("Meniu principal");
 	meniuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	meniuPrincipal.setResizable(false);
@@ -25,14 +26,11 @@ public class creareMeniuPrincipal extends JFrame{
 	meniuPrincipal.setSize(1080, 720);
 	meniuPrincipal.setLocationRelativeTo(null);
 	
-	//aici se modifica dupa fiecare calculator in parte cu source path ul fiecaruia
-	// Load image coord 102 294 - 975 360
-	// help 102 391 - 524 456
-	// exit 556 391 - 978 456 
-	
+	//Cream fundalul pentru GUI1 pe care il setam cu o imagine
 	JLabel background = new JLabel(new ImageIcon("src\\pip_proiect2023\\[gui-1]fundal.png"));
 	meniuPrincipal.setContentPane(background);
 	
+	//Crearea butonului de LOAD IMAGE
 	JButton li = new JButton("");
 	li.setBounds(102, 277, 975-120, 360-300);
 	li.setOpaque(false);
@@ -40,6 +38,7 @@ public class creareMeniuPrincipal extends JFrame{
 	li.setBorderPainted(false);
 	meniuPrincipal.add(li);
 	
+	//Crearea butonului de HELP
 	JButton help = new JButton("");
 	help.setBounds(97, 375, 524-110, 456-400);
 	help.setOpaque(false);
@@ -47,6 +46,7 @@ public class creareMeniuPrincipal extends JFrame{
 	help.setBorderPainted(false);
 	meniuPrincipal.add(help);
 	
+	//Crearea butonului de EXIT
 	JButton exit = new JButton("");
 	exit.setBounds(552, 375, 524-110, 456-400);
 	exit.setOpaque(false);
@@ -54,6 +54,7 @@ public class creareMeniuPrincipal extends JFrame{
 	exit.setBorderPainted(false);
 	meniuPrincipal.add(exit);
 	
+	//Implementarea functionarii butonului de LOAD IMAGE
 	ActionListener act_li= new ActionListener() {
         public void actionPerformed(ActionEvent e) {
         	
@@ -75,6 +76,7 @@ public class creareMeniuPrincipal extends JFrame{
     };
 	li.addActionListener(act_li);
 	
+	//Implementarea functionarii butonului de HELP
 	ActionListener act_help=new ActionListener() {
 		
 		@Override
@@ -82,12 +84,15 @@ public class creareMeniuPrincipal extends JFrame{
 			// TODO Auto-generated method stub
 			if(e.getActionCommand() == "")
 			{
+				//Vericiare functionalitate
 				System.out.println("Print help");
+				//Deschide un GUI cu indicatiile necesare folosirii aplicatiei
 			}
 		}
 	};
 	help.addActionListener(act_help);
 	
+	//Implementarea functionarii butonului EXIT
 	ActionListener act_exit=new ActionListener() {
 		
 		@Override
@@ -95,7 +100,10 @@ public class creareMeniuPrincipal extends JFrame{
 			// TODO Auto-generated method stub
 			if(e.getActionCommand() == "")
 			{
+				//Vericiare functionalitate
 				System.out.println("Print exit");
+				//Inchide aplicatia
+				System.exit(0);
 			}
 		}
 	};
