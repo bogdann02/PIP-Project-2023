@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
+import javax.swing.filechooser.FileNameExtensionFilter;
 public class creareMeniuPrincipal extends JFrame{
 	
 	/**
@@ -59,6 +59,12 @@ public class creareMeniuPrincipal extends JFrame{
         public void actionPerformed(ActionEvent e) {
         	
             JFileChooser fileChooser = new JFileChooser();
+            
+            //Creare filtru pentru butonul LOAD pentru a selecta doar fisierele de tip
+            //"png", "jpg", "jpeg", "tif", "tiff"
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "png", "jpg", "jpeg", "tif", "tiff");
+            fileChooser.setFileFilter(filter);
+            
             int result = fileChooser.showOpenDialog(creareMeniuPrincipal.this);
             if (result == JFileChooser.APPROVE_OPTION) {
             	
