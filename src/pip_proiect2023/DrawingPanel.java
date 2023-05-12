@@ -83,14 +83,21 @@ public class DrawingPanel extends JPanel {
         return new Rectangle(x, y, width, height);
     }
     
+    //de testat daca parametrul returnat in urma apelului functiei getList() este de tip lista
+    
     public List<Rectangle> getList() {
     	return rectangles;
     }
+    
+    //de testat daca lista nu este deja goala
+    //in cazul in care are elemente, vedem daca se pot sterge elementele
     
     public void clearList()
     {
     	rectangles = new ArrayList<>();
     }
+    
+    //de testat daca exista cel putin 1 element care poate fi sters
     
     public void undoList()
     {
