@@ -1,11 +1,16 @@
 package pip_proiect2023;
 
-import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 
 public class gui2 {
 
@@ -56,4 +61,31 @@ public class gui2 {
 		lblNewLabel.setBounds(0, 0, 1904, 1041);
 		frmGui.getContentPane().add(lblNewLabel);
 	}
+	
+	public static BufferedImage cropImage(BufferedImage image, Rectangle rectangle) {
+        // Crop the image
+        BufferedImage croppedImage = image.getSubimage(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+
+        return croppedImage;
+    }
+
+    public static void saveImage(BufferedImage image, String outputFolder) {
+        // Generate a random file name
+        String randomFileName = UUID.randomUUID().toString() + ".jpg";
+
+        // Create the output folder if it doesn't exist
+        File folder = new File(outputFolder);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+
+        // Save the image to the specified output folder with the random file name
+        String outputPath = outputFolder + File.separator + randomFileName;
+        try {
+            ImageIO.write(image, "jpg", new File(outputPath));
+            System.out.println("Image saved successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
