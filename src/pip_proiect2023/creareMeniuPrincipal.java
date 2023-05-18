@@ -2,6 +2,7 @@ package pip_proiect2023;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.Paths;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,7 +16,15 @@ public class creareMeniuPrincipal extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private static final String CALE_IMPLICITA = "images";
 
+    public static String incarcaImagine(String image) {
+        
+   
+    	System.out.println(Paths.get(CALE_IMPLICITA, image).toString());
+            return Paths.get(CALE_IMPLICITA, image).toString();
+    }
 	public creareMeniuPrincipal() {
 	
 	// Se creaza GUI1 pentru meniul principal
@@ -27,7 +36,7 @@ public class creareMeniuPrincipal extends JFrame{
 	meniuPrincipal.setLocationRelativeTo(null);
 	
 	//Cream fundalul pentru GUI1 pe care il setam cu o imagine
-	JLabel background = new JLabel(new ImageIcon("src\\pip_proiect2023\\[gui-1]fundal.png"));
+	JLabel background = new JLabel(new ImageIcon(incarcaImagine("[gui-1]fundal.png")));
 	meniuPrincipal.setContentPane(background);
 	
 	//Crearea butonului de LOAD IMAGE
@@ -55,7 +64,9 @@ public class creareMeniuPrincipal extends JFrame{
 	meniuPrincipal.add(exit);
 	
 	//Implementarea functionarii butonului de LOAD IMAGE
+	
 	ActionListener act_li= new ActionListener() {
+		
         public void actionPerformed(ActionEvent e) {
         	
             JFileChooser fileChooser = new JFileChooser();
