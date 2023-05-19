@@ -11,20 +11,20 @@ public class testare_fct_imagini {
     @Test
     public void testCropImage() {
         // Definim un test pentru decuparea unei imagini
-        // și verificăm rezultatul așteptat utilizând aserțiuni
+        // verificam rezultatul asteptat utilizand asertiuni
         
         // Exemplu:
         
-        // Cream o imagine fictivă pentru testare
+        // Cream o imagine fictiva pentru testare
         BufferedImage image = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
         
         // Definim dreptunghiul pentru decupare
         Rectangle rectangle = new Rectangle(100, 100, 200, 200);
         
-        // Apelăm metoda cropImage
+        // Apelam metoda cropImage
         BufferedImage croppedImage = gui2.cropImage(image, rectangle);
         
-        // Verificăm lățimea și înălțimea așteptată a imaginii decupate
+        // Verificam latimea si lungimea asteptata a imaginii decupate
         assertEquals(200, croppedImage.getWidth());
         assertEquals(200, croppedImage.getHeight());
     }
@@ -32,23 +32,23 @@ public class testare_fct_imagini {
     @Test
     public void testSaveImage() {
         // Definim un test pentru salvarea unei imagini
-        // și verificăm rezultatul așteptat utilizând aserțiuni
+        // si verificam rezultatul asteptat utilizand asertiuni
         
         // Exemplu:
         
-        // Cream o imagine fictivă pentru testare
+        // Cream o imagine fictiva pentru testare
         BufferedImage image = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
         
-        // Specificăm folderul de ieșire pentru salvarea imaginii
+        // Specificam folderul de iesire pentru salvarea imaginii
         String outputFolder = "cale_catre_folder_iesire";
         
-        // Apelăm metoda saveImage
+        // Apelam metoda saveImage
         gui2.saveImage(image, outputFolder);
         
-        // Verificăm că imaginea a fost salvată cu succes
-        // Putem verifica dacă fișierul există în folderul de ieșire sau orice altă condiție dorită
+        // Verificam ca imaginea a fost salvata cu succes
+        // Putem verifica daca fisierul exista in folderul de iesire sau orice alta conditie dorita
        
-        File outputFile = new File(outputFolder + File.separator + "9f96b9c2-1e33-4841-9190-a057c2d81b85.jpg");
+        File outputFile = new File(outputFolder + File.separator + "69e90967-610c-4c4d-a3c2-cfee99ddc6fd.jpg");
         assertTrue(outputFile.exists());
     }
 }
