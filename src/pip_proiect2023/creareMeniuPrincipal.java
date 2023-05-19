@@ -104,6 +104,9 @@ public class creareMeniuPrincipal extends JFrame{
 				//Vericiare functionalitate
 				System.out.println("Print help");
 				//Deschide un GUI cu indicatiile necesare folosirii aplicatiei
+				HELP_GUI help_gui = new HELP_GUI();
+				help_gui.setVisible(true);
+				help_gui.setSize(1920,1080);
 			}
 		}
 	};
