@@ -2,6 +2,7 @@ package pip_proiect2023;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.nio.file.Paths;
 
 import javax.swing.ImageIcon;
@@ -65,32 +66,31 @@ public class creareMeniuPrincipal extends JFrame{
 	
 	//Implementarea functionarii butonului de LOAD IMAGE
 	
-	ActionListener act_li= new ActionListener() {
-		
-        public void actionPerformed(ActionEvent e) {
-        	
-            JFileChooser fileChooser = new JFileChooser();
-            
-            //Creare filtru pentru butonul LOAD pentru a selecta doar fisierele de tip
-            //"png", "jpg", "jpeg", "tif", "tiff"
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "png", "jpg", "jpeg", "tif", "tiff");
-            fileChooser.setFileFilter(filter);
-            
-            int result = fileChooser.showOpenDialog(creareMeniuPrincipal.this);
-            if (result == JFileChooser.APPROVE_OPTION) {
-            	
-                // User has selected a file
-                String filePath = fileChooser.getSelectedFile().getAbsolutePath();
-                
-                // Close the file chooser dialog box
-                dispose();
-                
-                // Open another JFrame for editing the image
-                
-                new gui2(filePath);
-            }
-        }
-    };
+	ActionListener act_li = new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+	        JFileChooser fileChooser = new JFileChooser();
+	        
+	        // Setarea directorului curent la folderul dorit
+	        String folderPath = "Path"; // Inlocuiti "Path" cu calea completa catre folderul dorit
+	        fileChooser.setCurrentDirectory(new File(folderPath));
+	        
+	        // Crearea filtrului pentru a selecta doar fisierele de imagine
+	        FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "png", "jpg", "jpeg", "tif", "tiff");
+	        fileChooser.setFileFilter(filter);
+	        
+	        int result = fileChooser.showOpenDialog(creareMeniuPrincipal.this);
+	        if (result == JFileChooser.APPROVE_OPTION) {
+	            // Utilizatorul a selectat un fisier
+	            String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+	            
+	            // Inchideti dialogul file chooser
+	            dispose();
+	            
+	            // Deschideti un alt JFrame pentru editarea imaginii
+	            new gui2(filePath);
+	        }
+	    }
+	};
 	li.addActionListener(act_li);
 	
 	//Implementarea functionarii butonului de HELP
