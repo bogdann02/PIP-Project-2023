@@ -16,11 +16,16 @@ public class DrawingPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private List<Rectangle> rectangles;
     private Point startPoint, endPoint;
+    public Color Culoare = Color.BLACK;
     
-    public DrawingPanel() {
+    /**
+     * Constructor pentru select box
+     * @param c Culoarea select box-ului
+     */
+    public DrawingPanel(Color c) {
         // Initialize the rectangles list
         rectangles = new ArrayList<>();
-        
+        Culoare = c;
         // Add a mouse listener to the panel to handle dragging and selecting
         addMouseListener(new MouseAdapter() {
             @Override
@@ -51,28 +56,29 @@ public class DrawingPanel extends JPanel {
         });
     }
     
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
         // Draw the rectangles on the graphics object
         for (Rectangle rectangle : rectangles) {
-            g.setColor(Color.BLUE);
+            g.setColor(Culoare);
             g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
         }
         
         // Draw the selection rectangle if the mouse is being dragged
         if (startPoint != null && endPoint != null) {
             Rectangle selectionRectangle = createRectangle(startPoint, endPoint);
-            g.setColor(new Color(0, 0, 255, 64));
+            g.setColor(Culoare);
             g.fillRect(selectionRectangle.x, selectionRectangle.y, selectionRectangle.width, selectionRectangle.height);
         }
     }
     /**
-     * 
-     * @param startPoint
-     * @param endPoint
-     * @return
+     * Creare Rectangle pentru crop
+     * @param startPoint Punct colt stanga sus
+     * @param endPoint Punct colt dreapta jos
+     * @return Variabila de tip Rectangle
      */
     private Rectangle createRectangle(Point startPoint, Point endPoint) {
         int x = Math.min(startPoint.x, endPoint.x);
@@ -84,21 +90,28 @@ public class DrawingPanel extends JPanel {
     }
     
     //de testat daca parametrul returnat in urma apelului functiei getList() este de tip lista
-    
+    /**
+     * Extragere lista cu Rectangles
+     * @return Lista cu variabile Rectangles pentru crop
+     */
     public List<Rectangle> getList() {
     	return rectangles;
     }
     
     //de testat daca lista nu este deja goala
     //in cazul in care are elemente, vedem daca se pot sterge elementele
-    
+    /**
+     * Stergere lista cu variabile Rectangles
+     */
     public void clearList()
     {
     	rectangles = new ArrayList<>();
     }
     
     //de testat daca exista cel putin 1 element care poate fi sters
-    
+    /**
+     * Sterge ultimul element adaugat in lista cu variabile Rectangles
+     */
     public void undoList()
     {
     	rectangles.remove(rectangles.size()-1);
