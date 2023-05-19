@@ -1,18 +1,28 @@
 package pip_proiect2023;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 
 public class gui2 {
+	  public static String incarcaImagine(String image) {
+		  final String CALE_IMPLICITA = "images";
+		   
+	    	System.out.println(Paths.get(CALE_IMPLICITA, image).toString());
+	            return Paths.get(CALE_IMPLICITA, image).toString();
+	    }
 
 	private JFrame frmGui;
 
@@ -63,12 +73,15 @@ public class gui2 {
 		Image scaledImage = image.getScaledInstance(1348, 901, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImage);
 		image_worker.setIcon(scaledIcon);
-		
+		 image_worker.setBorder((Border) new LineBorder(Color.BLACK, 10));
+
 		frmGui.add(image_worker);
 		
+		JLabel lblNewLabel = new JLabel(new ImageIcon(incarcaImagine("[gui-2]fundal.png")));
+		//meniuPrincipal.setContentPane(lblNewLabel);
 		
-		JLabel lblNewLabel = new JLabel("background");
-		lblNewLabel.setIcon(new ImageIcon(gui2.class.getResource("/pip_proiect2023/[gui-2]fundal.png")));
+		//JLabel lblNewLabel = new JLabel("background");
+		//lblNewLabel.setIcon(new ImageIcon(gui2.class.getResource("[gui-2]fundal.png")));
 		lblNewLabel.setBounds(0, 0, 1904, 1041);
 		frmGui.getContentPane().add(lblNewLabel);
 	}
