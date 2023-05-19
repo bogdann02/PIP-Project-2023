@@ -14,7 +14,7 @@ public class testare_lista{
 
     @Before
     public void setUp() {
-        // Inițializarea listei cu elemente pentru testare
+        // Initializarea  listei cu elemente pentru testare
         rectangles = new ArrayList<>();
         rectangles.add(new Rectangle(1, 2));
         rectangles.add(new Rectangle(3, 4));
@@ -22,13 +22,13 @@ public class testare_lista{
 
     @Test
     public void testClearList() {
-        // Verifică dacă lista nu este goală înainte de apelul funcției clearList()
+        // Vrificam daca lista nu este goala inainte  de apelul functuiei clearList()
         Assert.assertFalse(rectangles.isEmpty());
 
-        // Apelul funcției clearList()
+        // Apelul functiei clearList()
         clearList();
 
-        // Verifică dacă lista este goală după apelul funcției clearList()
+        // Verificam daca lista este goala dupa apelul functiei clearList()
         Assert.assertTrue(rectangles.isEmpty());
     }
 
@@ -39,7 +39,7 @@ public class testare_lista{
     public void testGetListReturnType() {
         List<Rectangle> result = getList();
 
-        // Verifică dacă rezultatul returnat este de tipul List<Rectangle>
+        // Verificam daca rezultatul returnat este de tipul List<Rectangle>
         Assert.assertTrue(result instanceof List);
         Assert.assertTrue(result.get(0) instanceof Rectangle);
     }
@@ -49,16 +49,16 @@ public class testare_lista{
     }
     @Test
     public void testUndoList() {
-        // Adăugăm mai întâi un element în listă
+        // Adaugam mai intai un element in lista
         rectangles.add(new Rectangle(5, 6));
 
-        // Verificăm dacă lista conține noul element adăugat
+        // Verificam daca lista contine noul element adaugat
         Assert.assertEquals(3, rectangles.size());
 
-        // Apelăm funcția undoList() pentru a șterge ultimul element
+        // Apelam functia undoList() pentru a sterge ultimul element
         undoList();
 
-        // Verificăm dacă ultimul element a fost eliminat corect
+        // Verificam daca ultimul element a fost eliminat corect
         Assert.assertEquals(2, rectangles.size());
         Assert.assertFalse(rectangles.contains(new Rectangle(5, 6)));
     }
