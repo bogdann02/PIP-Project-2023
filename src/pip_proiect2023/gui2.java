@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.imageio.ImageIO;
 
 public class gui2 {
@@ -84,6 +85,68 @@ public class gui2 {
 		//lblNewLabel.setIcon(new ImageIcon(gui2.class.getResource("[gui-2]fundal.png")));
 		lblNewLabel.setBounds(0, 0, 1904, 1041);
 		frmGui.getContentPane().add(lblNewLabel);
+		
+		
+		//standardWidth este latimea unui buton, latimea fiind standard declarata
+		//standardHeight_functionale este inaltimea butoanelor cele de sus, cele pe care apasam pentru a selecta tipul de crop
+		//standardHeight este inaltimea butoanelor de jos, clear all, undo, done 
+				
+		int standardWidth = 1902-1420;
+		int standardHeight_functionale = 100;
+		int standardHeight = 80;
+				
+		//creem butonul
+		JButton masina = new JButton("");
+		//ii setam pozitia si dimensiunile la buton cu .setBounds(x,y,width,height)
+		masina.setBounds(1400, 60, standardWidth, standardHeight_functionale);
+		//facem butonul opac pentru a se vedea design-ul
+		masina.setOpaque(false);
+		masina.setContentAreaFilled(false);
+		masina.setBorderPainted(false);
+		//adaugam butonul pe frame 
+		frmGui.add(masina);
+		JButton semn = new JButton("");
+		semn.setBounds(1400, 190, standardWidth, standardHeight_functionale);
+		semn.setOpaque(false);
+		semn.setContentAreaFilled(false);
+		semn.setBorderPainted(false);
+		frmGui.add(semn);
+				
+		JButton semafor = new JButton("");
+		semafor.setBounds(1400, 310, standardWidth, standardHeight_functionale);
+		semafor.setOpaque(false);
+		semafor.setContentAreaFilled(false);
+		semafor.setBorderPainted(false);
+		frmGui.add(semafor);
+				
+		JButton cladire = new JButton("");
+		cladire.setBounds(1400, 440, standardWidth, standardHeight_functionale);
+		cladire.setOpaque(false);
+		cladire.setContentAreaFilled(false);
+		cladire.setBorderPainted(false);
+		frmGui.add(cladire);
+				
+				
+		JButton clear_all = new JButton("");
+		clear_all.setBounds(1400, 640, standardWidth, standardHeight);
+		clear_all.setOpaque(false);
+		clear_all.setContentAreaFilled(false);
+		clear_all.setBorderPainted(false);
+		frmGui.add(clear_all);
+				
+		JButton undo = new JButton("");
+		undo.setBounds(1400, 770, standardWidth, standardHeight);
+		undo.setOpaque(false);
+		undo.setContentAreaFilled(false);
+		undo.setBorderPainted(false);
+		frmGui.add(undo);
+				
+		JButton done = new JButton("");
+		done.setBounds(1400, 900, standardWidth, standardHeight);
+		done.setOpaque(false);
+		done.setContentAreaFilled(false);
+		done.setBorderPainted(false);
+		frmGui.add(done);
 	}
 	
 	public static BufferedImage cropImage(BufferedImage image, Rectangle rectangle) {
