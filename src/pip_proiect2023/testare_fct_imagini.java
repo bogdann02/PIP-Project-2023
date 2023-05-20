@@ -8,6 +8,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class testare_fct_imagini {
+	
+	/**
+	 * Testam daca functia testCropImage() cropeaza imaginea
+	 */
     @Test
     public void testCropImage() {
         // Definim un test pentru decuparea unei imagini
@@ -28,7 +32,10 @@ public class testare_fct_imagini {
         assertEquals(200, croppedImage.getWidth());
         assertEquals(200, croppedImage.getHeight());
     }
-
+    
+    /**
+     * Testam daca functia testSaveImage() salveaza imaginea
+     */
     @Test
     public void testSaveImage() {
         // Definim un test pentru salvarea unei imagini
