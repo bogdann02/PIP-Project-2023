@@ -19,6 +19,12 @@ public class creareMeniuPrincipal extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	private static final String CALE_IMPLICITA = "images";
+	
+	/**
+	 * 
+	 * @param image Numele imaginii 
+	 * @return Path-ul unde se gaseste poza selectata
+	 */
 
     public static String incarcaImagine(String image) {
         
@@ -26,6 +32,9 @@ public class creareMeniuPrincipal extends JFrame{
     	System.out.println(Paths.get(CALE_IMPLICITA, image).toString());
             return Paths.get(CALE_IMPLICITA, image).toString();
     }
+    /**
+     * Functie de creare a Meniului Principal
+     */
 	public creareMeniuPrincipal() {
 	
 	// Se creaza GUI1 pentru meniul principal
@@ -64,9 +73,12 @@ public class creareMeniuPrincipal extends JFrame{
 	exit.setBorderPainted(false);
 	meniuPrincipal.add(exit);
 	
-	//Implementarea functionarii butonului de LOAD IMAGE
 	
+	//Implementarea functionarii butonului de LOAD IMAGE	
 	ActionListener act_li = new ActionListener() {
+		/**
+		 * Functie pentru actiunea butonului LOAD IMAGE
+		 */
 	    public void actionPerformed(ActionEvent e) {
 	        JFileChooser fileChooser = new JFileChooser();
 	        
@@ -105,8 +117,7 @@ public class creareMeniuPrincipal extends JFrame{
 				System.out.println("Print help");
 				//Deschide un GUI cu indicatiile necesare folosirii aplicatiei
 				HELP_GUI help_gui = new HELP_GUI();
-				help_gui.setVisible(true);
-				help_gui.setSize(1920,1080);
+				meniuPrincipal.dispose();
 			}
 		}
 	};
@@ -116,6 +127,7 @@ public class creareMeniuPrincipal extends JFrame{
 	ActionListener act_exit=new ActionListener() {
 		
 		@Override
+		
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			if(e.getActionCommand() == "")
