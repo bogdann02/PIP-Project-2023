@@ -1,23 +1,27 @@
 package pip_proiect2023;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.UUID;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.imageio.ImageIO;
 
-public class gui2 {
+@SuppressWarnings("serial")
+public class gui2 extends JFrame {
 	  public static String incarcaImagine(String image) {
 		  final String CALE_IMPLICITA = "images";
 		   
@@ -26,7 +30,11 @@ public class gui2 {
 	    }
 
 	private JFrame frmGui;
-
+	public static BufferedImage image;
+	public BufferedImage copy_image;
+	public static JLabel imageLabel;
+	private JPanel drawingPanelContainer;
+	private DrawingPanel currentDrawingPanel;
 	/**
 	 * Launch the application.
 	 */
@@ -62,29 +70,53 @@ public class gui2 {
 		
 		//acum vom face un Jlabel in cadrul caruia va fi setata poza importata ca poza de fundal pentru acel jlabel, de unde va fi prelucrata
 		//String-ul "path" este primit ca parametru din fisierul "creareMeniuPrincipal.java", acest String fiind calea catre poza pe care o vom importa
+		try {
+			image = ImageIO.read(new File(path));
+			image = resize(image, 1348,901);
+			copy_image = image;
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e);
+		}
 		
-		JLabel image_worker = new JLabel();
-		ImageIcon imageIcon = new ImageIcon(path);
-		Image image = imageIcon.getImage();
+		imageLabel = new JLabel(new ImageIcon(image));
 		
 		//cu un padding de 26,67 fata de margini , dimensiunea jPanel-ului va fi 1348 x 901 (dimensiune generata de WindowBuilder)
 		//pentru resize-ul imaginii de fiecare data
 		
-		image_worker.setBounds(26, 67, 1348, 901);
-		Image scaledImage = image.getScaledInstance(1348, 901, Image.SCALE_SMOOTH);
-		ImageIcon scaledIcon = new ImageIcon(scaledImage);
-		image_worker.setIcon(scaledIcon);
-		 image_worker.setBorder((Border) new LineBorder(Color.BLACK, 10));
+		drawingPanelContainer = new JPanel();
+		drawingPanelContainer.setBounds(26,67,1348,901);
+		drawingPanelContainer.setBorder((Border) new LineBorder(Color.BLACK, 10));
+		drawingPanelContainer.add(imageLabel);
+		
+		
+		drawingPanelContainer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				try {
+					currentDrawingPanel.mousePressed(e);}
+				catch (Exception e2) {
+					System.out.println(e2);
+				}
+			}
 
-		frmGui.add(image_worker);
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				try {
+					currentDrawingPanel.mouseReleased(e);
+				}
+				catch (Exception e3) {
+					System.out.println(e3);
+				}
+			}
+		});
+
+		frmGui.add(drawingPanelContainer);
 		
-		JLabel lblNewLabel = new JLabel(new ImageIcon(incarcaImagine("[gui-2]fundal.png")));
-		//meniuPrincipal.setContentPane(lblNewLabel);
-		
-		//JLabel lblNewLabel = new JLabel("background");
-		//lblNewLabel.setIcon(new ImageIcon(gui2.class.getResource("[gui-2]fundal.png")));
-		lblNewLabel.setBounds(0, 0, 1904, 1041);
-		frmGui.getContentPane().add(lblNewLabel);
+		JLabel background = new JLabel(new ImageIcon(incarcaImagine("[gui-2]fundal.png")));
+		background.setBounds(0, 0, 1904, 1041);
+		frmGui.getContentPane().add(background);
 		
 		
 		//standardWidth este latimea unui buton, latimea fiind standard declarata
@@ -94,7 +126,8 @@ public class gui2 {
 		int standardWidth = 1902-1420;
 		int standardHeight_functionale = 100;
 		int standardHeight = 80;
-				
+		
+		
 		//creem butonul
 		JButton masina = new JButton("");
 		//ii setam pozitia si dimensiunile la buton cu .setBounds(x,y,width,height)
@@ -147,8 +180,46 @@ public class gui2 {
 		done.setContentAreaFilled(false);
 		done.setBorderPainted(false);
 		frmGui.add(done);
+		
+		DrawingPanel draw_masina = new DrawingPanel();
+		draw_masina.setColor(Color.RED);
+		DrawingPanel draw_semn = new DrawingPanel();
+		draw_semn.setColor(Color.GREEN);
+		DrawingPanel draw_cladire = new DrawingPanel();
+		draw_cladire.setColor(Color.BLUE);
+		DrawingPanel draw_semafor = new DrawingPanel();
+		draw_semafor.setColor(Color.YELLOW);
+		
+		masina.addActionListener(e -> setCurrentDrawingPanel(draw_masina));
+		semn.addActionListener(e -> setCurrentDrawingPanel(draw_semn));
+		semafor.addActionListener(e -> setCurrentDrawingPanel(draw_semafor));
+		cladire.addActionListener(e -> setCurrentDrawingPanel(draw_cladire));
+		
+		undo.addActionListener(e -> {
+			currentDrawingPanel.undoLastItem();
+//			draw_cladire.paintRegions();	//not working
+//			draw_semafor.paintRegions();
+//			draw_semn.paintRegions();
+//			draw_masina.paintRegions();
+			});
+		clear_all.addActionListener(e -> {
+			currentDrawingPanel.clearAllItems();
+//			draw_cladire.paintRegions();	//not working
+//			draw_semafor.paintRegions();
+//			draw_semn.paintRegions();
+//			draw_masina.paintRegions();
+			});
+		String path_img="/pip_proiect2023/Export";
+		done.addActionListener(e -> {
+			saveImage(image, path_img);
+		});
 	}
 	
+	
+	private void setCurrentDrawingPanel(DrawingPanel drawingPanel) {
+        currentDrawingPanel = drawingPanel;
+    }
+
 	public static BufferedImage cropImage(BufferedImage image, Rectangle rectangle) {
         // Crop the image
         BufferedImage croppedImage = image.getSubimage(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
@@ -156,7 +227,7 @@ public class gui2 {
         return croppedImage;
     }
 
-    public static void saveImage(BufferedImage image, String outputFolder) {
+    public static void saveImage(BufferedImage img, String outputFolder) {
         // Generate a random file name
         String randomFileName = UUID.randomUUID().toString() + ".jpg";
 
@@ -169,10 +240,22 @@ public class gui2 {
         // Save the image to the specified output folder with the random file name
         String outputPath = outputFolder + File.separator + randomFileName;
         try {
-            ImageIO.write(image, "jpg", new File(outputPath));
+            ImageIO.write(img, "jpg", new File(outputPath));
             System.out.println("Image saved successfully.");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    
+    public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
+        Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+        BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g2d = dimg.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+
+        return dimg;
+    }  
+    
 }
