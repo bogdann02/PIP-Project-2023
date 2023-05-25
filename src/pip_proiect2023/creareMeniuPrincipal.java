@@ -83,7 +83,7 @@ public class creareMeniuPrincipal extends JFrame{
 	        JFileChooser fileChooser = new JFileChooser();
 	        
 	        // Setarea directorului curent la folderul dorit
-	        String folderPath = "Path"; // Inlocuiti "Path" cu calea completa catre folderul dorit
+	        String folderPath = "Path";
 	        fileChooser.setCurrentDirectory(new File(folderPath));
 	        
 	        // Crearea filtrului pentru a selecta doar fisierele de imagine
@@ -92,13 +92,8 @@ public class creareMeniuPrincipal extends JFrame{
 	        
 	        int result = fileChooser.showOpenDialog(creareMeniuPrincipal.this);
 	        if (result == JFileChooser.APPROVE_OPTION) {
-	            // Utilizatorul a selectat un fisier
 	            String filePath = fileChooser.getSelectedFile().getAbsolutePath();
-	            
-	            // Inchideti dialogul file chooser
 	            dispose();
-	            
-	            // Deschideti un alt JFrame pentru editarea imaginii
 	            new gui2(filePath);
 	        }
 	    }
@@ -113,9 +108,7 @@ public class creareMeniuPrincipal extends JFrame{
 			// TODO Auto-generated method stub
 			if(e.getActionCommand() == "")
 			{
-				//Vericiare functionalitate
 				System.out.println("Print help");
-				//Deschide un GUI cu indicatiile necesare folosirii aplicatiei
 				HELP_GUI help_gui = new HELP_GUI();
 				meniuPrincipal.dispose();
 			}
@@ -132,9 +125,7 @@ public class creareMeniuPrincipal extends JFrame{
 			// TODO Auto-generated method stub
 			if(e.getActionCommand() == "")
 			{
-				//Vericiare functionalitate
 				System.out.println("Print exit");
-				//Inchide aplicatia
 				System.exit(0);
 			}
 		}

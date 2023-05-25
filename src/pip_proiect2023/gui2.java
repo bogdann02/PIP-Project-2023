@@ -132,8 +132,8 @@ public class gui2 extends JFrame {
 		int standardHeight_functionale = 100;
 		int standardHeight = 80;
 		
+		//Crearea butoanelor
 		
-		//creem butonul
 		JButton masina = new JButton("");
 		//ii setam pozitia si dimensiunile la buton cu .setBounds(x,y,width,height)
 		masina.setBounds(1400, 60, standardWidth, standardHeight_functionale);
@@ -195,26 +195,25 @@ public class gui2 extends JFrame {
 		DrawingPanel draw_semafor = new DrawingPanel();
 		draw_semafor.setColor(Color.YELLOW);
 		
+		//Adaugam functionalitatile butoanelor
 		masina.addActionListener(e -> setCurrentDrawingPanel(draw_masina));
 		semn.addActionListener(e -> setCurrentDrawingPanel(draw_semn));
 		semafor.addActionListener(e -> setCurrentDrawingPanel(draw_semafor));
 		cladire.addActionListener(e -> setCurrentDrawingPanel(draw_cladire));
 		
+		//Implementarea functionalitatilor butoanelor UNDO si CLEAR ALL
+		//UNDO - sterge ultima decupare facuta
+		//CLEAR ALL - sterge toate decuparile facute
 		undo.addActionListener(e -> {
 			currentDrawingPanel.undoLastItem();
-//			draw_cladire.paintRegions();	//not working
-//			draw_semafor.paintRegions();
-//			draw_semn.paintRegions();
-//			draw_masina.paintRegions();
 			});
 		clear_all.addActionListener(e -> {
 			currentDrawingPanel.clearAllItems();
-//			draw_cladire.paintRegions();	//not working
-//			draw_semafor.paintRegions();
-//			draw_semn.paintRegions();
-//			draw_masina.paintRegions();
 			});
-		
+
+		//Implementarea functionalitatii butonului DONE -> salveaza in folderele corespunzatoare
+		//imaginile decupate
+
 		done.addActionListener(e -> {
 	
 			for (Rectangle r: draw_masina.getList())
@@ -243,11 +242,20 @@ public class gui2 extends JFrame {
 		});
 	}
 	
-	
+	/**
+	 * Functia retine variabila curenta de tip DrawingPanel in folosinta
+	 * @param Variabila de tip DrawingPanel activa
+	 */
 	private void setCurrentDrawingPanel(DrawingPanel drawingPanel) {
         currentDrawingPanel = drawingPanel;
     }
 
+	/**
+	 * Extragerea imaginii decupate
+	 * @param image Imaginea pe care lucram
+	 * @param rectangle Dimensiunile si coordonatele imaginii pe care dorim sa o extragem
+	 * @return Imaginea extrasa decupata
+	 */
 	public static BufferedImage cropImage(BufferedImage image, Rectangle rectangle) {
         // Crop the image
         BufferedImage croppedImage = image.getSubimage(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
@@ -255,7 +263,13 @@ public class gui2 extends JFrame {
         return croppedImage;
     }
 
-    
+
+    /**
+     * Salveaza imaginile in folderele corespunzatoare
+     * @param image Imaginea decupata
+     * @param folderPath Path-ul in care salvam imaginile decupate
+     */
+
 	public static void saveImageToFolder(BufferedImage image, String folderPath) {
         try {
             File folder = new File(folderPath);
@@ -271,7 +285,15 @@ public class gui2 extends JFrame {
         }
     }
 	
-	
+
+	/**
+	 * Face resize la o imagine 
+	 * @param img Imaginea pe care dorim sa o redimensionam
+	 * @param newW Latimea noua dorita
+	 * @param newH Inaltimea noua dorita
+	 * @return Imaginea redimensionata
+	 */
+
     public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
         Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
         BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
