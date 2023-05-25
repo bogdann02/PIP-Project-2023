@@ -35,6 +35,10 @@ public class gui2 extends JFrame {
 	public static JLabel imageLabel;
 	private JPanel drawingPanelContainer;
 	private DrawingPanel currentDrawingPanel;
+	public String save_cladire = "Export\\Cladire";
+	public String save_masina = "Export\\Masina";
+	public String save_semn = "Export\\Semn";
+	public String save_semafor = "Export\\Semafor";
 	/**
 	 * Launch the application.
 	 */
@@ -73,7 +77,8 @@ public class gui2 extends JFrame {
 		try {
 			image = ImageIO.read(new File(path));
 			image = resize(image, 1348,901);
-			copy_image = image;
+			copy_image = ImageIO.read(new File(path));
+			copy_image = resize(copy_image, 1348,901);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -209,9 +214,32 @@ public class gui2 extends JFrame {
 //			draw_semn.paintRegions();
 //			draw_masina.paintRegions();
 			});
-		String path_img="/pip_proiect2023/Export";
+		
 		done.addActionListener(e -> {
-			saveImage(image, path_img);
+	
+			for (Rectangle r: draw_masina.getList())
+			{
+				BufferedImage buff = cropImage(copy_image,r);
+				saveImageToFolder(buff,save_masina);
+			}
+			for (Rectangle r:draw_cladire.getList())
+			{
+				BufferedImage buff = cropImage(copy_image,r);
+				saveImageToFolder(buff,save_cladire);
+			}
+			for (Rectangle r:draw_semafor.getList())
+			{
+				BufferedImage buff = cropImage(copy_image,r);
+				saveImageToFolder(buff,save_semafor);
+			}
+			for (Rectangle r:draw_semn.getList())
+			{
+				BufferedImage buff = cropImage(copy_image,r);
+				saveImageToFolder(buff,save_semn);
+			}
+			
+			
+			System.exit(0);
 		});
 	}
 	
@@ -227,26 +255,23 @@ public class gui2 extends JFrame {
         return croppedImage;
     }
 
-    public static void saveImage(BufferedImage img, String outputFolder) {
-        // Generate a random file name
-        String randomFileName = UUID.randomUUID().toString() + ".jpg";
-
-        // Create the output folder if it doesn't exist
-        File folder = new File(outputFolder);
-        if (!folder.exists()) {
-            folder.mkdirs();
-        }
-
-        // Save the image to the specified output folder with the random file name
-        String outputPath = outputFolder + File.separator + randomFileName;
+    
+	public static void saveImageToFolder(BufferedImage image, String folderPath) {
         try {
-            ImageIO.write(img, "jpg", new File(outputPath));
-            System.out.println("Image saved successfully.");
+            File folder = new File(folderPath);
+            if (!folder.exists()) {
+                folder.mkdirs();
+            }
+            String randomFileName = UUID.randomUUID().toString() + ".png";
+            File outputFile = new File(folder, randomFileName);
+            ImageIO.write(image, "png", outputFile);
+            System.out.println("Image saved successfully to: " + outputFile.getAbsolutePath());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error saving image: " + e.getMessage());
         }
     }
-    
+	
+	
     public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
         Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
         BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
