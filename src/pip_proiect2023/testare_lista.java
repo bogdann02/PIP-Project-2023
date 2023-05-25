@@ -23,12 +23,9 @@ public class testare_lista{
     @Test
     public void testClearList() {
         // Vrificam daca lista nu este goala inainte  de apelul functuiei clearList()
+    	
         Assert.assertFalse(rectangles.isEmpty());
-
-        // Apelul functiei clearList()
         clearList();
-
-        // Verificam daca lista este goala dupa apelul functiei clearList()
         Assert.assertTrue(rectangles.isEmpty());
     }
 
@@ -49,16 +46,9 @@ public class testare_lista{
     }
     @Test
     public void testUndoList() {
-        // Adaugam mai intai un element in lista
         rectangles.add(new Rectangle(5, 6));
-
-        // Verificam daca lista contine noul element adaugat
         Assert.assertEquals(3, rectangles.size());
-
-        // Apelam functia undoList() pentru a sterge ultimul element
         undoList();
-
-        // Verificam daca ultimul element a fost eliminat corect
         Assert.assertEquals(2, rectangles.size());
         Assert.assertFalse(rectangles.contains(new Rectangle(5, 6)));
     }
@@ -67,4 +57,3 @@ public class testare_lista{
         rectangles.remove(rectangles.size() - 1);
     }
 }
-
