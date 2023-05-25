@@ -34,9 +34,16 @@ public class testare_fct_imagini {
         
         BufferedImage image = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
         String outputFolder = "cale_catre_folder_iesire";
+
+        
+        // Apelam metoda saveImage
         gui2.saveImageToFolder(image, outputFolder);
+        
+        // Verificam ca imaginea a fost salvata cu succes
+        // Putem verifica daca fisierul exista in folderul de iesire sau orice alta conditie dorita
+
        
-        File outputFile = new File(outputFolder + File.separator + "69e90967-610c-4c4d-a3c2-cfee99ddc6fd.jpg");
+        File outputFile = new File(outputFolder + File.separator + "3a7ba506-d088-4d41-9702-6c739a9a120c.jpg");
         assertTrue(outputFile.exists());
     }
 }

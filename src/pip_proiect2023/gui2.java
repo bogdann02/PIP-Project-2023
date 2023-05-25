@@ -210,8 +210,10 @@ public class gui2 extends JFrame {
 		clear_all.addActionListener(e -> {
 			currentDrawingPanel.clearAllItems();
 			});
+
 		//Implementarea functionalitatii butonului DONE -> salveaza in folderele corespunzatoare
 		//imaginile decupate
+
 		done.addActionListener(e -> {
 	
 			for (Rectangle r: draw_masina.getList())
@@ -261,11 +263,13 @@ public class gui2 extends JFrame {
         return croppedImage;
     }
 
+
     /**
      * Salveaza imaginile in folderele corespunzatoare
      * @param image Imaginea decupata
      * @param folderPath Path-ul in care salvam imaginile decupate
      */
+
 	public static void saveImageToFolder(BufferedImage image, String folderPath) {
         try {
             File folder = new File(folderPath);
@@ -281,6 +285,7 @@ public class gui2 extends JFrame {
         }
     }
 	
+
 	/**
 	 * Face resize la o imagine 
 	 * @param img Imaginea pe care dorim sa o redimensionam
@@ -288,6 +293,7 @@ public class gui2 extends JFrame {
 	 * @param newH Inaltimea noua dorita
 	 * @return Imaginea redimensionata
 	 */
+
     public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
         Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
         BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
